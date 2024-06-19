@@ -1,11 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>hello index</p>
-</body>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='node_modules/materialize-css/dist/css/materialize.min.css') }}" media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen,projection"/>
+        <title>Shopping List</title>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo center">Shopping List</a>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="col s6">
+                <form id="item-form">
+                    <div class="input-field col s10">
+                        <input id="item_name" type="text" name="item_name" required>
+                        <label for="item_name">Nowy przedmiot</label>
+                    </div>
+                    <div class="input-field col s2">
+                        <input id="quantity" type="text" name="quantity" required>
+                        <label for="quantity">Ilość</label>
+                    </div>
+                    <button type="submit" class="btn col s12">add</button>
+                </form>
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th class="item">Do kupienia</th>
+                            <th class="quan">Ilość</th>
+                            <th class="bought">Kupione?</th>
+                            <th class="del"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="items-table">
+                        {% for item in items %}
+                        <tr>
+                            <td class="item">{{ item.ItemName }}</td>
+                            <td class="quan">{{ item.Quantity }}</td>
+                            <td class="bought">
+                                <label>
+                                    <input type="checkbox" class="filled-in" onchange="updateBought({{ item.ItemID }}, this.checked)" {% if item.Bought %}checked{% endif %}>
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td class="del"><button class="btn-small red" onclick="deleteItem({{ item.ItemID }})">usun</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='node_modules/materialize-css/dist/js/materialize.min.js') }}"></script>
+        <script>
+            
+        </script>
+    </body>
 </html>

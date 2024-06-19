@@ -1,0 +1,18 @@
+.item {
+    width: 60%;
+}
+
+.quan {
+    width: 10%;
+    text-align: right;
+}
+
+.bought {
+    width: 10%;
+    text-align: right;
+}
+
+.del {
+    width: 10%;
+    text-align: right;
+}
